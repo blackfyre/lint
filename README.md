@@ -29,5 +29,5 @@ Find who caused a syntax error. (git is required)
 One Line Installer
 ------------------
 
-    curl https://raw.github.com/dprevite/lint/master/lint.php > ~/bin/lint && chmod 0755 !#:3
+    curl https://raw.github.com/dprevite/lint/master/lint.php > /usr/bin/lint && chmod 0755 /usr/bin/lint
 
