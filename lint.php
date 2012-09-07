@@ -26,8 +26,6 @@
     public function __construct() {
       $this->path  = $_SERVER['PWD'];
       $this->files = $this->get_piped_files();
-      $this->parse_options();
-      $this->set_options();
       $this->run();
     }
 
@@ -50,6 +48,9 @@
             $this->path = $last; // snag last argument, if it wasn't an option switch
           }
         }
+
+        $this->parse_options();
+        $this->set_options();
 
         if (is_dir($this->path)) {
           $this->check_directory_contents($this->path);
@@ -165,7 +166,18 @@
           case 'b':
           case 'blame':
             if ($this->is_git_installed()) {
-              $this->options->blame = TRUE;
+              if ($this->is_git_repo()) {
+                if ($this->git_has_history()) {
+                  $this->options->blame = TRUE;
+                } else {
+                  echo 'Cannot run blame, git repo does not have any commit history.' . PHP_EOL;
+                  exit(1);
+                }
+              } else {
+                echo 'Cannot run blame, path is not a git repo or you are ' .
+                     'trying to run lint from outside the repo.' . PHP_EOL;
+                exit(1);
+              }
             } else {
               echo 'Cannot run blame, git is not installed.' . PHP_EOL;
               exit(1);
@@ -272,11 +284,15 @@
      * @return void
      **/
     private function find_blame($error) {
+      $lines_in_file = (int)trim(`wc -l < $error->path`);
+      if ($error->line > $lines_in_file) {
+        $error->line = $lines_in_file;
+      }
       $blame     = `git blame $error->path -L $error->line,$error->line --porcelain`;
       $git_lines = explode(PHP_EOL, trim($blame));
       $blame     = array();
       foreach ($git_lines as $git_line) {
-        list($var, $value) = explode(' ', $git_line, 2);
+        @list($var, $value) = explode(' ', $git_line, 2);
         $blame[$var] = $value;
       }
       if ($blame['author-mail'] == '<not.committed.yet>') {
@@ -295,6 +311,38 @@
     private function is_git_installed() {
       $git = trim(`which git`);
       return (!empty($git));
+    }
+
+
+    /**
+     * Find if the path belongs to a git repo
+     *
+     * @return boolean
+     **/
+    private function is_git_repo() {
+      $cmd = 'git status ' . $this->path . ' 2>&1';
+      $response = trim(`$cmd`);
+      if (strpos($response, 'fatal') !== FALSE) {
+        return FALSE;
+      } else {
+        return TRUE;
+      }
+    }
+
+
+    /**
+     * Find if the git repo has commit history
+     *
+     * @return boolean
+     **/
+    private function git_has_history() {
+      $cmd = 'git log ' . $this->path . ' 2>&1';
+      $response = trim(`$cmd`);
+      if (strpos($response, 'fatal') !== FALSE) {
+        return FALSE;
+      } else {
+        return TRUE;
+      }
     }
 
 
