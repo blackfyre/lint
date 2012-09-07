@@ -36,7 +36,7 @@
      * @return void
      **/
     private function run() {
-      // Piped files present
+      echo 'Linting files against PHP ' . phpversion() . PHP_EOL;
       if ($this->files) {
         foreach ($this->files as $file) {
           $this->check_file($path . '/' . $file);
