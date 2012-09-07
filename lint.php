@@ -165,22 +165,8 @@
           break;
           case 'b':
           case 'blame':
-            if ($this->is_git_installed()) {
-              if ($this->is_git_repo()) {
-                if ($this->git_has_history()) {
-                  $this->options->blame = TRUE;
-                } else {
-                  echo 'Cannot run blame, git repo does not have any commit history.' . PHP_EOL;
-                  exit(1);
-                }
-              } else {
-                echo 'Cannot run blame, path is not a git repo or you are ' .
-                     'trying to run lint from outside the repo.' . PHP_EOL;
-                exit(1);
-              }
-            } else {
-              echo 'Cannot run blame, git is not installed.' . PHP_EOL;
-              exit(1);
+            if ($this->is_blame_possible()) {
+              $this->options->blame = TRUE;
             }
           break;
           case 'h':
@@ -300,6 +286,31 @@
       } else {
         echo '    Caused by ' . $blame['author'] . ' ' . $blame['author-mail'] . PHP_EOL;
       }
+    }
+
+
+    /**
+     * Check if blame is possible, quit with error if not
+     *
+     * @return boolean
+     **/
+    private function is_blame_possible() {
+      if ($this->is_git_installed()) {
+        if ($this->is_git_repo()) {
+          if (!$this->git_has_history()) {
+            echo 'Cannot run blame, git repo does not have any commit history.' . PHP_EOL;
+            exit(1);
+          }
+        } else {
+          echo 'Cannot run blame, path is not a git repo or you are ' .
+               'trying to run lint from outside the repo.' . PHP_EOL;
+          exit(1);
+        }
+      } else {
+        echo 'Cannot run blame, git is not installed.' . PHP_EOL;
+        exit(1);
+      }
+      return TRUE;
     }
 
 
