@@ -1,0 +1,21 @@
+{
+    "name": "dprevite/lint",
+    "description": "Lint scans your code for PHP syntax errors.",
+    "type": "library",
+    "keywords": [
+        "lint"
+    ],
+    "homepage": "http://github.com/dprevite/lint",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan Previte"
+        }
+    ],
+    "require": {
+        "php": ">=5.1.2"
+    },
+    "bin": [
+        "scripts/lint"
+    ]
+}
