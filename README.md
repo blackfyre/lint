@@ -55,5 +55,5 @@ Check files, but ignore certain patterns to speed up the test:
 
 ### One Line Installer
 
-    curl https://raw.github.com/dprevite/lint/master/scripts/lint > /usr/bin/lint && chmod 0755 /usr/bin/lint
+    curl https://raw.githubusercontent.com/dprevite/lint/master/scripts/lint > /usr/bin/lint && chmod 0755 /usr/bin/lint
 
