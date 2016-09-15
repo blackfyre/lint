@@ -75,7 +75,7 @@
            'options:' . PHP_EOL .
             '  -q, --quiet:     disable verbose output' . PHP_EOL .
             '  -b, --blame:     display git blame along with error messages' . PHP_EOL .
-            '  -i, --ignore:    comma separated list of folder patterns to ignore' . PHP_EOL .
+            '  --exclude:       comma separated list of folder patterns to exclude' . PHP_EOL .
             '  -h, --help:      display this help screen' . PHP_EOL . PHP_EOL;
       exit(1);
     }

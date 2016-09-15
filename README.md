@@ -14,7 +14,7 @@ A command line tool to lint your PHP code for syntax errors. Run it from the com
     options:
       -q, --quiet:     disable verbose output
       -b, --blame:     display git blame along with error messages
-      --ignore:        comma separated list of folder patterns to ignore
+      --exclude:        comma separated list of folder patterns to exclude
       -h, --help:      display this help screen
 
 **Examples**
@@ -32,7 +32,7 @@ Find who caused a syntax error: (git is required)
 
 Check files, but ignore certain patterns to speed up the test:
 
-    $ lint --ignore=*views*
+    $ lint --exclude=*views*
     Linting files against PHP 5.3.10-1ubuntu3.2
 
     ............................................................
