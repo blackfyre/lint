@@ -14,7 +14,7 @@ A command line tool to lint your PHP code for syntax errors. Run it from the com
     options:
       -q, --quiet:     disable verbose output
       -b, --blame:     display git blame along with error messages
-      --exclude:        comma separated list of folder patterns to exclude
+      --exclude:       comma separated list of folder patterns to exclude
       -h, --help:      display this help screen
 
 **Examples**
@@ -27,20 +27,20 @@ Find who caused a syntax error: (git is required)
     E
     1 files checked, 1 errors.
     PHP Parse error:  syntax error, unexpected ';' in filename.php on line 5
-         Caused by Dan Previte <dprevite@gmail.com>
+         Caused by Dan Previte <dprevite@example.com>
 
 
 Check files, but ignore certain patterns to speed up the test:
 
     $ lint --exclude=*views*
-    Linting files against PHP 5.3.10-1ubuntu3.2
+    Linting files against PHP 7.0.6
 
     ............................................................
     ............................................................
     ................................................E...........
     180 files checked, 1 errors.
     PHP Parse error:  syntax error, unexpected ';' in filename.php on line 26
-         Caused by Dan Previte <dprevite@gmail.com>
+         Caused by Dan Previte <dprevite@example.com>
 
 ## Install
 
