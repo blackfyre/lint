@@ -22,7 +22,7 @@ A command line tool to lint your PHP code for syntax errors. Run it from the com
 Find who caused a syntax error: (git is required)
 
     $ lint -b ../filename.php
-    Linting files against PHP 5.3.10-1ubuntu3.2
+    Linting files against PHP 7.0.6
 
     E
     1 files checked, 1 errors.
