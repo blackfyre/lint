@@ -46,14 +46,10 @@ Check files, but ignore certain patterns to speed up the test:
 
 ### Composer
 
-    {
-      "require": {
-        "dprevite/lint": "dev-master"
-      }
-    }
+    composer require dprevite/lint
 
 
 ### One Line Installer
 
-    curl https://raw.githubusercontent.com/dprevite/lint/master/scripts/lint > /usr/local/bin/lint && chmod 0755 /usr/local/bin/lint
+    wget https://raw.githubusercontent.com/dprevite/lint/master/scripts/lint && sudo mv lint /usr/local/bin/lint && sudo chmod 0755 /usr/local/bin/lint
 
