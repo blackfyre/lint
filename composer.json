@@ -1,5 +1,5 @@
 {
-    "name": "dprevite/lint",
+    "name": "blackfyre/lint",
     "description": "Lint scans your code for PHP syntax errors.",
     "type": "library",
     "keywords": [
@@ -10,6 +10,9 @@
     "authors": [
         {
             "name": "Dan Previte"
+        },
+        {
+            "name": "Miklós Galicz"
         }
     ],
     "require": {
